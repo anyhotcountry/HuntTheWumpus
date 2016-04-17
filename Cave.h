@@ -23,7 +23,6 @@ class Cave {
   void drawCave();
   boolean contains(int16_t x, int16_t y);
 
-  void press(boolean p);
   int enter();
   int shoot();
   void reset();

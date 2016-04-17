@@ -24,11 +24,6 @@ boolean Cave::contains(int16_t x, int16_t y) {
   return true;
 }
 
-void Cave::press(boolean p) {
-  laststate = currstate;
-  currstate = p;
-}
-
 int Cave::enter() {
     if (isEntered)
     {
@@ -50,7 +45,7 @@ int Cave::enter() {
     if (state == PIT)
     {
       _gfx->println("Fell in a\nbottomless pit");
-      _gfx->fillCircle(_x, _y, CAVE_RADIUS_INNER, RED);
+      _gfx->fillCircle(_x, _y, CAVE_RADIUS_INNER - 5, RED);
       return 1;
     }
 
@@ -127,6 +122,7 @@ void Cave::leave() {
       cave3->reset();
     }
 }
+
 void Cave::setState(int16_t newState)
 {
   state = newState;
@@ -250,10 +246,18 @@ void Cave::drawMap(Adafruit_GFX *tft, Cave caves[]) {
 }
 
 void Cave::writeShootResult(int hit) {
-    // write number of arrowa
-    _gfx->setCursor(0, 95);
-    _gfx->setTextSize(2);
-    _gfx->setTextColor(WHITE);
-    _gfx->print(hit ? "HIT!   " : "MISSED!");  
+    if (hit) {
+      // write number of arrowa
+      _gfx->setCursor(50, 180);
+      _gfx->setTextSize(6);
+      _gfx->setTextColor(GREEN, BLACK);
+      _gfx->print("HIT!");
+      return;       
+    }
+
+    _gfx->setCursor(5, 105);
+    _gfx->setTextSize(1);
+    _gfx->setTextColor(WHITE, BLACK);
+    _gfx->print("MISSED!");  
 }
 

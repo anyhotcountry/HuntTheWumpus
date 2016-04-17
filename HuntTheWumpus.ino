@@ -158,6 +158,7 @@ void loop()
       if (mode == SHOOT)
       {
         gameOver = activeCave->cave1->shoot() || --arrows == 0;
+        drawArrows();
       } else {
         activeCave->leave();
         activeCave = activeCave->cave1;
@@ -179,6 +180,7 @@ void loop()
       if (mode == SHOOT)
       {
         gameOver = activeCave->cave3->shoot() || --arrows == 0;
+        drawArrows();
       } else {
         activeCave->leave();
         activeCave = activeCave->cave3;
@@ -198,9 +200,9 @@ void loop()
 
 void drawArrows() {
     // write number of arrowa
-    tft.setCursor(0, 85);
+    tft.setCursor(5, 85);
     tft.setTextSize(2);
-    tft.setTextColor(RED);
+    tft.setTextColor(RED, BLACK);
     tft.print(arrows);  
 }
 
